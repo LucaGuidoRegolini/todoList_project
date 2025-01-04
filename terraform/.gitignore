@@ -1,0 +1,8 @@
+.terraform
+
+terraform.tfstate
+
+.terraform.lock.hd
+
+variables.tfvars
+keys

@@ -43,12 +43,12 @@ resource "random_id" "build_id" {
 resource "null_resource" "push_to_ecr" {
   provisioner "local-exec" {
     command = <<EOT
-    $(aws ecr get-login-password --region ${var.region} | docker login --username AWS --password-stdin ${aws_ecr_repository.repository.repository_url})
-    docker push ${aws_ecr_repository.repository.repository_url}:latest
+    $(aws ecr get-login-password --region ${var.region} | docker login --username AWS --password-stdin ${aws_ecr_repository.backend.repository_url})
+    docker push ${aws_ecr_repository.backend.repository_url}:latest
     EOT
   }
 
-  depends_on = [aws_ecr_repository.repository, docker_image.app_image]
+  depends_on = [aws_ecr_repository.backend, docker_image.app_image]
 
   triggers = {
     force_rebuild = random_id.build_id.hex
@@ -56,6 +56,6 @@ resource "null_resource" "push_to_ecr" {
 }
 
 output "ecr_repository_url" {
-  value       = aws_ecr_repository.my_backend_repo.repository_url
+  value       = aws_ecr_repository.backend.repository_url
   description = "The URL of the ECR repository"
 }

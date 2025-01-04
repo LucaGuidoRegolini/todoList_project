@@ -30,9 +30,7 @@ jobs:
         working-directory: ./terraform/enviroments/develop
 
       - name: Apply Terraform Plan
-        run: terraform apply -auto-approve \
-          -var="jwt_secret=${{ secrets.JWT_SECRET }}" \
-          -var="refresh_secret=${{ secrets.JWT_REFRESH_SECRET }}"
+        run: terraform apply -auto-approve -var="jwt_secret=${{ secrets.JWT_SECRET }}" -var="refresh_secret=${{ secrets.JWT_REFRESH_SECRET }}"
         working-directory: ./terraform/enviroments/develop
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}

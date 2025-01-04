@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { backendApi } from "@/api/backend";
-import { errorTranslated } from "@/api/error_transleted";
+import { errorTranslated } from "@/api/error_translate";
 import { Task } from "@/api/backendDTO";
 
 export default function TodoListScreen() {

@@ -14,7 +14,7 @@ import { useAppDispatch } from "@/app/hooks";
 import { setUser } from "@/app/feature/userSlice";
 import { useNavigate } from "react-router-dom";
 import { backendApi } from "@/api/backend";
-import { errorTranslated } from "@/api/error_transleted";
+import { errorTranslated } from "@/api/error_translate";
 
 type PasswordCriteria = {
   minLength: boolean;

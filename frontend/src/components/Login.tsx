@@ -14,7 +14,7 @@ import { useAppDispatch } from "@/app/hooks";
 import { setUser } from "@/app/feature/userSlice";
 import { backendApi } from "@/api/backend";
 import { toast, ToastContainer } from "react-toastify";
-import { errorTranslated } from "@/api/error_transleted";
+import { errorTranslated } from "@/api/error_translate";
 
 interface LoginFormState {
   email: string;

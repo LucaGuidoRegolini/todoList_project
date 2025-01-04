@@ -1,0 +1,19 @@
+# Ignorar node_modules e outros diretórios pesados
+node_modules
+dist
+build
+
+# Ignorar arquivos de configuração locais
+.env
+.env.local
+.env.*
+.vscode
+
+# Ignorar arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar arquivos de testes e logs
+test/
+*.log
+coverage

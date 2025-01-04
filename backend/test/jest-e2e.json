@@ -1,0 +1,5 @@
+{
+  "preset": "./jest-preset.js",
+  "rootDir": ".",
+  "testTimeout": 30000
+}

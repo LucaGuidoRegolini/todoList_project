@@ -8,14 +8,15 @@ resource "aws_s3_bucket" "react_website" {
 
   tags = {
     Environment = "${var.environment}"
+    Project     = "todo-list-project"
   }
 }
 
 resource "aws_s3_bucket_public_access_block" "react_website" {
   bucket                  = aws_s3_bucket.react_website.id
-  block_public_acls       = true
+  block_public_acls       = false
   block_public_policy     = false
-  ignore_public_acls      = true
+  ignore_public_acls      = false
   restrict_public_buckets = false
 }
 
@@ -69,4 +70,9 @@ resource "aws_cloudfront_distribution" "react_website_cdn" {
   }
 
   default_root_object = "index.html"
+}
+
+output "cloudfront_distribution_domain_name" {
+  value       = aws_cloudfront_distribution.react_website_cdn.domain_name
+  description = "The domain name of the CloudFront Distribution for the React website"
 }

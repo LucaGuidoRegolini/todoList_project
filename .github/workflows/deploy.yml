@@ -45,7 +45,7 @@ jobs:
         working-directory: ./terraform/enviroments/develop
 
       - name: Get output values
-        working-directory: ./terraform/environments/develop
+        working-directory: ./terraform/enviroments/develop
         run: |
           export LOAD_BALANCER_URL=$(jq -r '.load_balancer_url.value' terraform-output.json)
           echo "LOAD_BALANCER_URL=$LOAD_BALANCER_URL" >> $GITHUB_ENV

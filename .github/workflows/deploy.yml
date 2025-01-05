@@ -41,6 +41,10 @@ jobs:
         working-directory: ./terraform/enviroments/develop
         run: terraform output -raw  load_balancer_url > load_balancer_url.txt
 
+      - name: Checkout txt
+        working-directory: ./terraform/enviroments/develop
+        run: cat load_balancer_url.txt
+
       - name: Load load balancer URL
         working-directory: ./terraform/enviroments/develop
         run: echo "LOAD_BALANCER_URL=$(cat load_balancer_url.txt)" >> $GITHUB_ENV

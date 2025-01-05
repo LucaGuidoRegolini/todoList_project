@@ -37,11 +37,13 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1
 
-      - name: Get output values
+      - name: Get load balancer URL
         working-directory: ./terraform/enviroments/develop
-        run: |
-          terraform output -raw  load_balancer_url > load_balancer_url.txt
-          echo "LOAD_BALANCER_URL=$(cat load_balancer_url.txt)" >> $GITHUB_ENV
+        run: terraform output -raw  load_balancer_url > load_balancer_url.txt
+
+      - name: Load load balancer URL
+        working-directory: ./terraform/enviroments/develop
+        run: echo "LOAD_BALANCER_URL=$(cat load_balancer_url.txt)" >> $GITHUB_ENV
 
       - name: Checkout env
         run: echo ${{ env.LOAD_BALANCER_URL }}

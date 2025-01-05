@@ -10,3 +10,7 @@ module "dev" {
 output "website_url" {
   value = module.dev.cloudfront_distribution_domain_name
 }
+
+output "load_balancer_url" {
+  value = module.dev.lb_dns_name
+}

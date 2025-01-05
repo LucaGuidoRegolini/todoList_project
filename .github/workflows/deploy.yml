@@ -13,9 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install jq
-        run: sudo apt-get install jq
-
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
@@ -40,29 +37,10 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1
 
-      - name: Terraform Output
-        run: terraform output -json > terraform-output.json
-        working-directory: ./terraform/enviroments/develop
-
-      - name: Print output values
-        run: cat -A terraform-output.json
-        working-directory: ./terraform/enviroments/develop
-
-      - name: Clean JSON file
-        working-directory: ./terraform/enviroments/develop
-        run: |
-          tr -d '\r' < terraform-output.json | sed 's/\$//g' > cleaned-terraform-output.json
-          mv cleaned-terraform-output.json terraform-output.json
-          cat -A terraform-output.json
-
-      - name: Validate JSON
-        working-directory: ./terraform/enviroments/develop
-        run: cat terraform-output.json | jq .
-
       - name: Get output values
         working-directory: ./terraform/enviroments/develop
         run: |
-          export LOAD_BALANCER_URL=$(jq -r '.load_balancer_url.value' terraform-output.json)
+          export LOAD_BALANCER_URL=$(terraform output load_balancer_url)
           echo "LOAD_BALANCER_URL=$LOAD_BALANCER_URL" >> $GITHUB_ENV
 
       - name: Setup Node.js

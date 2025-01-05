@@ -46,11 +46,12 @@ jobs:
         run: cat load_balancer_url.txt
 
       - name: Load load balancer URL
+        id: load-balancer-url
         working-directory: ./terraform/enviroments/develop
-        run: echo "LOAD_BALANCER_URL=$(cat load_balancer_url.txt | tr -d '\r\n')" >> $GITHUB_ENV
+        run: echo "LOAD_BALANCER_URL=$(cat load_balancer_url.txt | tr -d '\r\n')"
 
       - name: Checkout env
-        run: echo ${{ env.LOAD_BALANCER_URL }}
+        run: echo ${{ steps.load-balancer-url.outputs.LOAD_BALANCER_URL }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -65,7 +66,7 @@ jobs:
         run: npm run build
         working-directory: ./frontend
         env:
-          VITE_API_BASE_URL: http://${{ env.LOAD_BALANCER_URL }}
+          VITE_API_BASE_URL: http://${{ steps.load-balancer-url.outputs.LOAD_BALANCER_URL }}
           VITE_PORT: "3000"
 
       - name: Deploy to S3

@@ -30,7 +30,7 @@ resource "aws_ecs_task_definition" "todo_list_task" {
     portMappings = [
       {
         containerPort = 4000
-        hostPort      = 80
+        hostPort      = 4000
         protocol      = "tcp"
       }
     ]

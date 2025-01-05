@@ -28,7 +28,7 @@ resource "aws_lb" "todo_list_lb" {
 
 resource "aws_lb_target_group" "todo_list_target_group" {
   name     = "todo-list-target-group"
-  port     = 80
+  port     = 4000
   protocol = "HTTP"
   vpc_id   = aws_vpc.main.id
 
@@ -37,7 +37,7 @@ resource "aws_lb_target_group" "todo_list_target_group" {
   health_check {
     interval            = 30
     path                = "/"
-    port                = "80"
+    port                = "4000"
     protocol            = "HTTP"
     timeout             = 5
     unhealthy_threshold = 2

@@ -48,6 +48,17 @@ jobs:
         run: cat -A terraform-output.json
         working-directory: ./terraform/enviroments/develop
 
+      - name: Clean JSON file
+        working-directory: ./terraform/enviroments/develop
+        run: |
+          tr -d '\r' < terraform-output.json | sed 's/\$//g' > cleaned-terraform-output.json
+          mv cleaned-terraform-output.json terraform-output.json
+          cat -A terraform-output.json
+
+      - name: Validate JSON
+        working-directory: ./terraform/enviroments/develop
+        run: cat terraform-output.json | jq .
+
       - name: Get output values
         working-directory: ./terraform/enviroments/develop
         run: |

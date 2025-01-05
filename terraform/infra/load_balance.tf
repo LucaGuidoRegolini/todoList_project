@@ -84,18 +84,6 @@ resource "aws_lb_listener" "http_listener" {
   }
 }
 
-resource "aws_lb_listener" "https_listener" {
-  load_balancer_arn = aws_lb.todo_list_lb.arn
-  port              = "443"
-  protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
-
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.todo_list_target_group.arn
-  }
-}
-
 output "lb_dns_name" {
   value = aws_lb.todo_list_lb.dns_name
 }

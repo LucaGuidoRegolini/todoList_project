@@ -55,7 +55,7 @@ jobs:
         working-directory: ./terraform/enviroments/develop
         run: |
           LOAD_BALANCER_URL=$(cat load_balancer_url.txt | tr -d '\r\n')
-          echo "::set-output name=LOAD_BALANCER_URL::$LOAD_BALANCER_URL"
+          echo "LOAD_BALANCER_URL=$LOAD_BALANCER_URL" >> $GITHUB_OUTPUT
 
       - name: Checkout env
         run: echo ${{ steps.load-balancer-url.outputs.LOAD_BALANCER_URL }}

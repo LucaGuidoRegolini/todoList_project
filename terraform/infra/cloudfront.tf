@@ -32,8 +32,6 @@ resource "aws_cloudfront_distribution" "react_website_cdn" {
 
   default_root_object = "index.html"
 }
-
-
 output "cloudfront_distribution_domain_name" {
   value       = aws_cloudfront_distribution.react_website_cdn.domain_name
   description = "The domain name of the CloudFront Distribution for the React website"

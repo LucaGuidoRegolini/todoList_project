@@ -48,7 +48,7 @@ jobs:
 
       - name: Checkout url
         working-directory: ./terraform/enviroments/develop
-        run: echo terraform output -raw  load_balancer_url
+        run: echo $(terraform output -raw  load_balancer_url)
 
       - name: Load load balancer URL
         id: load-balancer-url

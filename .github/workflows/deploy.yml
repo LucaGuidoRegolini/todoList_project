@@ -41,7 +41,7 @@ jobs:
         working-directory: ./terraform/enviroments/develop
         run: |
           export LOAD_BALANCER_URL=$(terraform output load_balancer_url)
-          echo "LOAD_BALANCER_URL=$LOAD_BALANCER_URL" >> $GITHUB_ENV
+          echo LOAD_BALANCER_URL=$LOAD_BALANCER_URL >> $GITHUB_ENV
 
       - name: Setup Node.js
         uses: actions/setup-node@v3

@@ -39,7 +39,7 @@ jobs:
 
       - name: Get load balancer URL
         working-directory: ./terraform/enviroments/develop
-        run: terraform output -raw  load_balancer_url > load_balancer_url.txt
+        run: terraform output -raw  load_balancer_url | sed 's/::debug.*//' > load_balancer_url.txt
 
       - name: Checkout txt
         working-directory: ./terraform/enviroments/develop

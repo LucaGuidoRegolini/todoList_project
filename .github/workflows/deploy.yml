@@ -37,6 +37,15 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1
 
+      - name: Terraform Output
+        run: terraform output -json > terraform-output.json
+        working-directory: ./terraform/enviroments/develop
+
+      - name: Get output values
+        run: |
+          export LOAD_BALANCER_URL=$(jq -r '.load_balancer_url.value' terraform-output.json)
+          echo "LOAD_BALANCER_URL=$LOAD_BALANCER_URL" >> $GITHUB_ENV
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -50,7 +59,7 @@ jobs:
         run: npm run build
         working-directory: ./frontend
         env:
-          VITE_API_BASE_URL: "http://localhost:3000"
+          VITE_API_BASE_URL: ${{ env.LOAD_BALANCER_URL }}
           VITE_PORT: "3000"
 
       - name: Deploy to S3

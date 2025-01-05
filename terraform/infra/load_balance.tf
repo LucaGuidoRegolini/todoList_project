@@ -34,6 +34,10 @@ resource "aws_lb_target_group" "todo_list_target_group" {
 
   target_type = "ip"
 
+  lifecycle {
+    create_before_destroy = true
+  }
+
   health_check {
     interval            = 30
     path                = "/"
@@ -49,6 +53,10 @@ resource "aws_lb_listener" "http_listener" {
   load_balancer_arn = aws_lb.todo_list_lb.arn
   port              = "80"
   protocol          = "HTTP"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 
   default_action {
     type             = "forward"

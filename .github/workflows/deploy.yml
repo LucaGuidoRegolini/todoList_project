@@ -46,10 +46,6 @@ jobs:
         working-directory: ./terraform/enviroments/develop
         run: cat -A load_balancer_url.txt
 
-      - name: Checkout url
-        working-directory: ./terraform/enviroments/develop
-        run: echo $(terraform output -raw  load_balancer_url | sed 's/^.*load_balancer_url[[:space:]]*//;s/[[:space:]]*::.*//' | tr -d '\n' | sed 's/^[[:space:]]*//')
-
       - name: Load load balancer URL
         id: load-balancer-url
         working-directory: ./terraform/enviroments/develop

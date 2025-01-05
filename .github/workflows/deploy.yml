@@ -44,6 +44,10 @@ jobs:
         run: terraform output -json > terraform-output.json
         working-directory: ./terraform/enviroments/develop
 
+      - name: Print output values
+        run: cat terraform-output.json
+        working-directory: ./terraform/enviroments/develop
+
       - name: Get output values
         working-directory: ./terraform/enviroments/develop
         run: |

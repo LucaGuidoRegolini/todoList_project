@@ -1,14 +1,20 @@
 resource "aws_s3_bucket" "react_website" {
   bucket = "${var.environment}-react-website-todo-list"
-
-  website {
-    index_document = "index.html"
-    error_document = "index.html"
-  }
-
   tags = {
     Environment = "${var.environment}"
     Project     = "todo-list-project"
+  }
+}
+
+resource "aws_s3_bucket_website_configuration" "react_website" {
+  bucket = aws_s3_bucket.react_website.id
+
+  index_document {
+    suffix = "index.html"
+  }
+
+  error_document {
+    key = "index.html"
   }
 }
 

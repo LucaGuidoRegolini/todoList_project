@@ -35,6 +35,11 @@ resource "aws_ecs_task_definition" "todo_list_task" {
       }
     ]
   }])
+
+  tags = {
+    Environment = "${var.environment}"
+    Project     = "todo-list-project"
+  }
 }
 
 resource "aws_security_group" "todo_list_sg" {
@@ -56,6 +61,11 @@ resource "aws_security_group" "todo_list_sg" {
     protocol    = "-1" # Permite tráfego para qualquer destino
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags = {
+    Environment = "${var.environment}"
+    Project     = "todo-list-project"
+  }
 }
 
 resource "aws_ecs_service" "todo_list_service" {
@@ -74,5 +84,10 @@ resource "aws_ecs_service" "todo_list_service" {
     target_group_arn = aws_lb_target_group.todo_list_target_group.arn
     container_name   = "todo-list-container"
     container_port   = 4000
+  }
+
+  tags = {
+    Environment = "${var.environment}"
+    Project     = "todo-list-project"
   }
 }

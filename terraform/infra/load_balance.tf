@@ -16,6 +16,11 @@ resource "aws_security_group" "allow_http" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags = {
+    Environment = "${var.environment}"
+    Project     = "todo-list-project"
+  }
 }
 
 resource "aws_security_group" "allow_https" {
@@ -36,6 +41,11 @@ resource "aws_security_group" "allow_https" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags = {
+    Environment = "${var.environment}"
+    Project     = "todo-list-project"
+  }
 }
 
 resource "aws_lb" "todo_list_lb" {
@@ -44,6 +54,11 @@ resource "aws_lb" "todo_list_lb" {
   load_balancer_type = "application"
   security_groups    = [aws_security_group.allow_http.id, aws_security_group.allow_https.id]
   subnets            = [aws_subnet.public_subnet_a.id, aws_subnet.public_subnet_b.id]
+
+  tags = {
+    Environment = "${var.environment}"
+    Project     = "todo-list-project"
+  }
 }
 
 resource "aws_lb_target_group" "todo_list_target_group" {
@@ -67,6 +82,11 @@ resource "aws_lb_target_group" "todo_list_target_group" {
     unhealthy_threshold = 2
     healthy_threshold   = 5
   }
+
+  tags = {
+    Environment = "${var.environment}"
+    Project     = "todo-list-project"
+  }
 }
 
 resource "aws_lb_listener" "http_listener" {
@@ -81,6 +101,11 @@ resource "aws_lb_listener" "http_listener" {
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.todo_list_target_group.arn
+  }
+
+  tags = {
+    Environment = "${var.environment}"
+    Project     = "todo-list-project"
   }
 }
 

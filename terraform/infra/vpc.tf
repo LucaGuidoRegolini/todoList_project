@@ -1,9 +1,19 @@
 resource "aws_internet_gateway" "todo_list_igw" {
   vpc_id = aws_vpc.main.id
+
+  tags = {
+    Environment = "${var.environment}"
+    Project     = "todo-list-project"
+  }
 }
 
 resource "aws_route_table" "public_route_table" {
   vpc_id = aws_vpc.main.id
+
+  tags = {
+    Environment = "${var.environment}"
+    Project     = "todo-list-project"
+  }
 }
 
 resource "aws_route" "internet_route" {
@@ -27,6 +37,11 @@ resource "aws_subnet" "public_subnet_a" {
   cidr_block              = "10.0.1.0/24"
   availability_zone       = "us-east-1a"
   map_public_ip_on_launch = true
+
+  tags = {
+    Environment = "${var.environment}"
+    Project     = "todo-list-project"
+  }
 }
 
 resource "aws_subnet" "public_subnet_b" {
@@ -34,8 +49,18 @@ resource "aws_subnet" "public_subnet_b" {
   cidr_block              = "10.0.0.0/24"
   availability_zone       = "us-east-1b"
   map_public_ip_on_launch = true
+
+  tags = {
+    Environment = "${var.environment}"
+    Project     = "todo-list-project"
+  }
 }
 
 resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
+
+  tags = {
+    Environment = "${var.environment}"
+    Project     = "todo-list-project"
+  }
 }

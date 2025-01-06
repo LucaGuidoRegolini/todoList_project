@@ -121,7 +121,7 @@ No final do projeto, o terraforms irá devolver os outputs:
 
 ## Documentação
 
-O projeto conta com o Swagger para criar a documentação da API. Para acessar a documentação, basta acessar a url [http://localhost:3000/docs](http://localhost:3000/docs)
+O projeto conta com o Swagger para criar a documentação da API. Para acessar a documentação, basta acessar a url [http://localhost:4000/docs](http://localhost:3000/docs)
 
 ## Testes
 
